@@ -18,12 +18,12 @@ Informação|No time|No trabalho|Concluido|
 História do Banco de Dados|:white_check_mark:|:construction:||
 8 Entidades|:white_check_mark:|:construction:||
 2 Relacionamentos n-n com Atributos|:construction:|:construction:|
-1 entidade Associativa|:construction:|:construction:|
+1 entidade Associativa|:white_check_mark:|:construction:|
 1 hierarquia de especialização/generalização|:construction:|:construction:|
 1 relacionamento identificador|:construction:|:construction:|
-1 relacionamento unário|:construction:|:construction:|
+1 relacionamento unário|:white_check_mark:|:construction:|
 1 atributo multivalorado e composto|:construction:|:construction:|
-pelo menos 30 atributos distribuídos entre as entidades e relacionamentos|:construction:|:construction:|
+pelo menos 30 atributos distribuídos entre as entidades e relacionamentos|:white_check_mark:|:construction:|
 Tabelas do Modelo Conceitual no BRmodelo|:construction:|:construction:|
 Tabelas do Modelos Conceitual no Astah|:construction:|:construction:|
 
