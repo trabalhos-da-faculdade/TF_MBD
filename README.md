@@ -22,7 +22,7 @@ História do Banco de Dados|:construction:||
 1 hierarquia de especialização/generalização|:white_check_mark:||
 1 relacionamento identificador|:construction:||
 1 relacionamento unário|:white_check_mark:||
-1 atributo multivalorado e composto|:construction:||
+1 atributo multivalorado e composto|:white_check_mark:||
 pelo menos 30 atributos distribuídos entre as entidades e relacionamentos|:white_check_mark:||
 Tabelas do Modelo Conceitual no BRmodelo|:white_check_mark:||
 Tabelas do Modelos Conceitual no Astah|:construction:||
