@@ -14,7 +14,7 @@ GLOSSÁRIO
 ### Modelo Conceitual
 
 Informação|No trabalho|Concluido|
-|---|---|---|---|
+|---|---|---|
 História do Banco de Dados|:construction:||
 8 Entidades|:white_check_mark:||
 2 Relacionamentos n-n com Atributos|:white_check_mark:||
