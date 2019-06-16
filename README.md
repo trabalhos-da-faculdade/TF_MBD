@@ -31,5 +31,12 @@ Tabelas do Modelos Conceitual no Astah|:construction:||
 
 Informação|No trabalho|Concluido|
 |---|---|---|
+Construção do Modelo Lógico|:white_check_mark:|
+
+## Programa SQL
+
+Informação|No trabalho|Concluido|
+|---|---|---|
+
 
 
