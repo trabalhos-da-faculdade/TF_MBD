@@ -19,7 +19,7 @@ História do Banco de Dados|:construction:||
 8 Entidades|:white_check_mark:||
 2 Relacionamentos n-n com Atributos|:white_check_mark:||
 1 entidade Associativa|:white_check_mark:||
-1 hierarquia de especialização/generalização|:construction:||
+1 hierarquia de especialização/generalização|:white_check_mark:||
 1 relacionamento identificador|:construction:||
 1 relacionamento unário|:white_check_mark:||
 1 atributo multivalorado e composto|:construction:||
