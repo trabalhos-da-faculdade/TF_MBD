@@ -11,7 +11,7 @@ GLOSSÁRIO
 ## Organização de construção do Trabalho
 
 
-### Modelo Conceitual
+### Modelo Conceitual Entidade-Relacionamento
 
 Informação|No trabalho|Concluido|
 |---|---|---|
@@ -26,4 +26,10 @@ História do Banco de Dados|:construction:||
 pelo menos 30 atributos distribuídos entre as entidades e relacionamentos|:white_check_mark:||
 Tabelas do Modelo Conceitual no BRmodelo|:white_check_mark:||
 Tabelas do Modelos Conceitual no Astah|:construction:||
+
+## Modelo Lógico
+
+Informação|No trabalho|Concluido|
+|---|---|---|
+
 
