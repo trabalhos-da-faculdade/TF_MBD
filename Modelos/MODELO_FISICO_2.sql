@@ -22,7 +22,7 @@ cavalos_treinados numeric(4),
 nome_distribuidor_armazem varchar(100)
 );
 
-CREATE TABLE distribuidores-armazens (
+CREATE TABLE distribuidores_armazens (
 nome_distribuidor_armazem varchar(100) PRIMARY KEY,
 id_armazem numeric(4),
 FOREIGN KEY(id_armazem) REFERENCES armazens (id_armazem)
@@ -34,7 +34,7 @@ quantidade_flechas numeric(4),
 quantidade_arcos numeric(4),
 nome_distribuidor_estabulo varchar(100),
 nome_distribuidor_armazem varchar(100),
-FOREIGN KEY(nome_distribuidor_armazem) REFERENCES distribuidores-armazens (nome_distribuidor_armazem)
+FOREIGN KEY(nome_distribuidor_armazem) REFERENCES distribuidores_armazens (nome_distribuidor_armazem)
 );
 
 CREATE TABLE arsenais (
@@ -52,7 +52,7 @@ quantidade_armadura numeric(4),
 nome_distribuidor_estabulo varchar(100)
 );
 
-CREATE TABLE distribuidores-estabulos (
+CREATE TABLE distribuidores_estabulos (
 nome_distribuidor_estabulo varchar(100) PRIMARY KEY,
 nome_estabulo varchar(100)
 );
@@ -170,40 +170,52 @@ numero_carroca numeric(4),
 FOREIGN KEY(numero_carroca) REFERENCES transportes (numero_carroca)
 );
 
+-- ARMAZENS
 ALTER TABLE armazens 
 ADD FOREIGN KEY(numero_fazenda) REFERENCES fazendas (numero_fazenda);
 ALTER TABLE armazens 
 ADD FOREIGN KEY(id_madeireira) REFERENCES madeireiras (id_madeireira);
 ALTER TABLE armazens 
 ADD FOREIGN KEY(id_forja) REFERENCES forjas (id_forja);
+-- FERREIROS
 ALTER TABLE ferreiros 
-ADD FOREIGN KEY(nome_distribuidor) REFERENCES distribuidores-armazens (nome_distribuidor_armazem);
+ADD FOREIGN KEY(nome_distribuidor_armazem) REFERENCES distribuidores_armazens (nome_distribuidor_armazem);
+-- CAVALEIROS
 ALTER TABLE cavaleiros 
-ADD FOREIGN KEY(nome_distribuidor) REFERENCES distribuidores-armazens (nome_distribuidor_armazem);
+ADD FOREIGN KEY(nome_distribuidor_armazem) REFERENCES distribuidores_armazens (nome_distribuidor_armazem);
+-- ARQUEIROS
 ALTER TABLE arqueiros 
-ADD FOREIGN KEY(nome_distribuidor_estabulo) REFERENCES distribuidores-estabulos (nome_distribuidor_estabulo);
+ADD FOREIGN KEY(nome_distribuidor_estabulo) REFERENCES distribuidores_estabulos (nome_distribuidor_estabulo);
+-- ARSENAIS
 ALTER TABLE arsenais 
 ADD FOREIGN KEY(nome_armadureiro) REFERENCES armadureiros (nome_armadureiro);
+-- ARMADUREIROS
 ALTER TABLE armadureiros 
-ADD FOREIGN KEY(nome_distribuidor) REFERENCES distribuidores-estabulos (nome_distribuidor_estabulo);
-ALTER TABLE distribuidores-estabulos
- ADD FOREIGN KEY(nome_estabulo) REFERENCES distribuidores-estabulos (nome_distribuidor_estabulo);
+ADD FOREIGN KEY(nome_distribuidor_estabulo) REFERENCES distribuidores_estabulos (nome_distribuidor_estabulo);
+-- DISTRIBUIDORES ESTABULOS
+ALTER TABLE distribuidores_estabulos
+ ADD FOREIGN KEY(nome_estabulo) REFERENCES distribuidores_estabulos (nome_distribuidor_estabulo);
+-- ESTABULOS
 ALTER TABLE estabulos 
 ADD FOREIGN KEY(quantidade_cavalos) REFERENCES cavalos (quantidade_cavalos);
 ALTER TABLE estabulos 
 ADD FOREIGN KEY(quantidade_couro) REFERENCES bois (quantidade_couro);
 ALTER TABLE estabulos 
 ADD FOREIGN KEY(quantidade_penas) REFERENCES galinhas (quantidade_penas);
+-- GENERAIS
 ALTER TABLE generais 
 ADD FOREIGN KEY(nome_quartel) REFERENCES quarteis (nome_quartel);
 ALTER TABLE generais 
 ADD FOREIGN KEY(rank_general) REFERENCES interagem (rank_general);
+-- SOLDADOS
 ALTER TABLE soldados 
 ADD FOREIGN KEY(nome_quartel) REFERENCES quarteis (nome_quartel);
+-- FAZENDAS
 ALTER TABLE fazendas 
 ADD FOREIGN KEY(quantidade_feno) REFERENCES fenos (quantidade_feno);
 ALTER TABLE fazendas 
 ADD FOREIGN KEY(quantidade_trigo) REFERENCES trigos (quantidade_trigo);
+-- MINAS
 ALTER TABLE minas 
 ADD FOREIGN KEY(quantidade_ferro) REFERENCES ferros (quantidade_ferro);
 ALTER TABLE minas 
@@ -211,7 +223,7 @@ ADD FOREIGN KEY(quantidade_carvao) REFERENCES carvoes (quantidade_carvao);
 
 -- INSERT DENTRO DO BANCO DE DADOS
 
---MINAS 
+-- MINAS 
 INSERT INTO ferros(quantidade_ferro)
 VALUES(200);
 INSERT INTO carvoes(quantidade_carvao)
@@ -219,49 +231,49 @@ VALUES(200);
 INSERT INTO minas(numero_mina,quantidade_servos,quantidade_ferro,quantidade_carvao)
 VALUES(1,20,200,200);
 
---TRANSPORTADOR DAS MINAS
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+-- TRANSPORTADOR DAS MINAS
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(1,20,1);
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(2,20,1);
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(3,20,1);
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(4,20,1);
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(5,20,1);
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(6,20,1);
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(7,20,1);
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(8,20,1);
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(9,20,1);
-INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina)
+INSERT INTO transportes(numero_carroca,quantidade_por_carrocas,numero_mina)
 VALUES(10,20,1);
 
 -- COLOCANDO NA FORJA
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,null,1);
+VALUES(1,10,1);
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,null,2);
+VALUES(2,10,2);
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,null,3);
+VALUES(3,10,3);
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,null,4);
+VALUES(4,10,4);
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,null,5);
+VALUES(5,10,5);
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,null,6);
+VALUES(6,10,6);
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,null,7);
+VALUES(7,10,7);
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,null,8);
+VALUES(8,10,8);
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,null,9);
+VALUES(9,10,9);
 INSERT INTO forjas(id_forja,quantidade_aco,numero_carroca)
-VALUES(1,100,10);
+VALUES(10,10,10);
 
 -- FAZENDAS
 INSERT INTO fenos(quantidade_feno)
@@ -271,23 +283,23 @@ VALUES(200);
 INSERT INTO fazendas(numero_fazenda,quantidade_servos,quantidade_feno,quantidade_trigo)
 VALUES(1,40,200,200);
 
---MADEIREIRAS
+-- MADEIREIRAS
 INSERT INTO madeireiras(id_madeireira,quantidade_madeira,quantidade_servos)
 VALUES(1,200,20);
 
---ARMAZENS
+-- ARMAZENS
 INSERT INTO armazens(id_armazem,numero_fazenda,id_madeireira,id_forja)
 VALUES(1,1,1,1);
 
---DISTRIBUIDORES-ARMAZEM
-INSERT INTO distribuidores-armazens(nome_distribuidor,id_armazem)
-VALUES('Hoogar',1); --este vai para os arqueiros
-INSERT INTO distribuidores-armazens(nome_distribuidor,id_armazem)
-VALUES('Edgar',1); --este vai para os ferreiros
-INSERT INTO distribuidores-armazens(nome_distribuidor,id_armazem)
-VALUES('Marshal',1); --este vai para os cavaleiros
+-- DISTRIBUIDORES-ARMAZEM
+INSERT INTO distribuidores_armazens(nome_distribuidor_armazem,id_armazem)
+VALUES('Hoogar',1); -- este vai para os arqueiros
+INSERT INTO distribuidores_armazens(nome_distribuidor_armazem,id_armazem)
+VALUES('Edgar',1); -- este vai para os ferreiros
+INSERT INTO distribuidores_armazens(nome_distribuidor_armazem,id_armazem)
+VALUES('Marshal',1); -- este vai para os cavaleiros
 
---ESTABULOS
+-- ESTABULOS
 INSERT INTO cavalos(quantidade_cavalos)
 VALUES(200);
 INSERT INTO bois(quantidade_couro)
@@ -297,39 +309,39 @@ VALUES(200);
 INSERT INTO estabulos(nome_estabulo,quantidade_cavalos,quantidade_couro,quantidade_penas,quantidade_servos)
 VALUES('Estabulo Ranch',200,200,200,40);
 
---DISTRIBUIDORES-ESTABULO
-INSERT INTO distribuidores-estabulos(nome_distribuidor_estabulo,nome_estabulo)
-VALUES('Krum','Estabulo Ranch'); --para o arqueiro
-INSERT INTO distribuidores-estabulos(nome_distribuidor_estabulo,nome_estabulo)
-VALUES('Helgar','Estabulo Ranch'); --para o armadureiro
-INSERT INTO distribuidores-estabulos(nome_distribuidor_estabulo,nome_estabulo)
-VALUES('Kratam','Estabulo Ranch'); --para o cavaleiro
+-- DISTRIBUIDORES-ESTABULO
+INSERT INTO distribuidores_estabulos(nome_distribuidor_estabulo,nome_estabulo)
+VALUES('Krum','Estabulo Ranch'); -- para o arqueiro
+INSERT INTO distribuidores_estabulos(nome_distribuidor_estabulo,nome_estabulo)
+VALUES('Helgar','Estabulo Ranch'); -- para o armadureiro
+INSERT INTO distribuidores_estabulos(nome_distribuidor_estabulo,nome_estabulo)
+VALUES('Kratam','Estabulo Ranch'); -- para o cavaleiro
 
---ARQUEIROS
+-- ARQUEIROS
 INSERT INTO arqueiros(nome_arqueiro,quantidade_flechas,quantidade_arcos,nome_distribuidor_estabulo,nome_distribuidor_armazem)
 VALUES('Arqueiro 1',100,100,'Krum','Hoogar');
 INSERT INTO arqueiros(nome_arqueiro,quantidade_flechas,quantidade_arcos,nome_distribuidor_estabulo,nome_distribuidor_armazem)
 VALUES('Arqueiro 2',100,100,'Krum','Hoogar');
 
---ARMADUREIROS
+-- ARMADUREIROS
 INSERT INTO armadureiros(nome_armadureiro,quantidade_armadura,nome_distribuidor_estabulo)
 VALUES('Armadureiro 1',200,'Helgar');
 
---FERREIROS
+-- FERREIROS
 INSERT INTO ferreiros(nome_ferreiro,quantidade_escudo,quantidade_lancas,quantidade_espadas,nome_distribuidor_armazem)
 VALUES('Ferreiro 1',20,20,20,'Edgar');
 
---CAVALEIROS
+-- CAVALEIROS
 INSERT INTO cavaleiros(nome_cavaleiro,quantidade_selas,cavalos_treinados,nome_distribuidor_armazem)
 VALUES('Cavaleiro Elegante',20,20,'Marshal');
 
---ARSENAIS
+-- ARSENAIS
 INSERT INTO arsenais(nome_arsenal,nome_ferreiro,nome_armadureiro,nome_arqueiro)
 VALUES('Arsenal do Reino','Ferreiro 1','Armadureiro 1','Arqueiro 1');
 INSERT INTO arsenais(nome_arsenal,nome_ferreiro,nome_armadureiro,nome_arqueiro)
 VALUES('Arsenal do Reino','Ferreiro 1','Armadureiro 1','Arqueiro 2');
 
---GENERAIS
+-- GENERAIS
 INSERT INTO generais(nome_general,habilidade,idade,nome_quartel,rank_general,titulo_nobreza)
 VALUES('General Cavaleiro','Escudo e Espadas',32,'Quartel dos Cavaleiros',100,'Nobre Cavaleiro');
 INSERT INTO generais(nome_general,habilidade,idade,nome_quartel,rank_general,titulo_nobreza)
@@ -337,7 +349,7 @@ VALUES('General Arqueiro','Arco e Flecha',20,'Quartel dos Arqueiros',35,'Nobre A
 INSERT INTO generais(nome_general,habilidade,idade,nome_quartel,rank_general,titulo_nobreza)
 VALUES('General Lançeiro','Lança e Escudo',34,'Quartel das Lanças',120,'Nobre das Lanças');
 
---TITULOS
+-- TITULOS
 INSERT INTO titulos(titulo_nobreza,tipo_titulo)
 VALUES('Nobre Cavaleiro','Titulo de Guerra');
 INSERT INTO titulos(titulo_nobreza,tipo_titulo)
@@ -345,7 +357,7 @@ VALUES('Nobre Arqueiro','Titulo de Guerra');
 INSERT INTO titulos(titulo_nobreza,tipo_titulo)
 VALUES('Nobre das Lanças','Titulo de Guerra');
 
---INTERAGEM
+-- INTERAGEM
 INSERT INTO interagem(rank_general,hierarquia,nome_general)
 VALUES(100,'SENIOR EM LUTA','General Cavaleiro');
 INSERT INTO interagem(rank_general,hierarquia,nome_general)
@@ -353,8 +365,8 @@ VALUES(35,'LUTADOR EXPERIENTE','General Arqueiro');
 INSERT INTO interagem(rank_general,hierarquia,nome_general)
 VALUES(120,'LUTADOR MESTRE','General Lançeiro');
 
---QUARTEIS
---Cavaeiros no Quartel
+-- QUARTEIS
+-- Cavaeiros no Quartel
 INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome_arsenal,id_soldado,nome_cavaleiro)
 VALUES('Quartel dos Cavaleiros','Treinamento de Escudo e Espadas',10,'General Cavaleiro','Arsenal do Reino',1,'Cavaleiro Elegante');
 INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome_arsenal,id_soldado,nome_cavaleiro)
@@ -375,7 +387,7 @@ INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome
 VALUES('Quartel dos Cavaleiros','Treinamento de Escudo e Espadas',10,'General Cavaleiro','Arsenal do Reino',9,'Cavaleiro Elegante');
 INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome_arsenal,id_soldado,nome_cavaleiro)
 VALUES('Quartel dos Cavaleiros','Treinamento de Escudo e Espadas',10,'General Cavaleiro','Arsenal do Reino',10,'Cavaleiro Elegante');
---Arqueiros no Quartel
+-- Arqueiros no Quartel
 INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome_arsenal,id_soldado,nome_cavaleiro)
 VALUES('Quartel dos Arqueiros','Treinamento de Arco e Flecha',5,'General Arqueiro','Arsenal do Reino',1,'Cavaleiro Elegante');
 INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome_arsenal,id_soldado,nome_cavaleiro)
@@ -386,7 +398,7 @@ INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome
 VALUES('Quartel dos Arqueiros','Treinamento de Arco e Flecha',5,'General Arqueiro','Arsenal do Reino',4,'Cavaleiro Elegante');
 INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome_arsenal,id_soldado,nome_cavaleiro)
 VALUES('Quartel dos Arqueiros','Treinamento de Arco e Flecha',5,'General Arqueiro','Arsenal do Reino',5,'Cavaleiro Elegante');
---Lançeiros no Quartel
+-- Lançeiros no Quartel
 INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome_arsenal,id_soldado,nome_cavaleiro)
 VALUES('Quartel das Lanças','Treinamento de Lança com Escudo',7,'General Lançeiro','Arsenal do Reino',1,'Cavaleiro Elegante');
 INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome_arsenal,id_soldado,nome_cavaleiro)
@@ -404,9 +416,9 @@ VALUES('Quartel das Lanças','Treinamento de Lança com Escudo',7,'General Lanç
 INSERT INTO quarteis(nome_quartel,tipo_quartel,numero_soldados,nome_general,nome_arsenal,id_soldado,nome_cavaleiro)
 VALUES('Quartel das Lanças','Treinamento de Lança com Escudo',7,'General Lançeiro','Arsenal do Reino',8,'Cavaleiro Elegante');
 
---SOLDADOS
+-- SOLDADOS
 
---soldados dos quarteis de cavaleiros
+-- soldados dos quarteis de cavaleiros
 INSERT INTO soldados(id_soldado,nome_quartel,habilidade,idade)
 VALUES(1,'Quartel dos Cavaleiros','Escudo e Espadas',20);
 INSERT INTO soldados(id_soldado,nome_quartel,habilidade,idade)
@@ -428,7 +440,7 @@ VALUES(9,'Quartel dos Cavaleiros','Escudo e Espadas',16);
 INSERT INTO soldados(id_soldado,nome_quartel,habilidade,idade)
 VALUES(10,'Quartel dos Cavaleiros','Escudo e Espadas',17);
 
---soldados dos quarteis de arqueiros
+-- soldados dos quarteis de arqueiros
 INSERT INTO soldados(id_soldado,nome_quartel,habilidade,idade)
 VALUES(1,'Quartel dos Arqueiros','Arco e Flecha',25);
 INSERT INTO soldados(id_soldado,nome_quartel,habilidade,idade)
@@ -440,7 +452,7 @@ VALUES(4,'Quartel dos Arqueiros','Arco e Flecha',22);
 INSERT INTO soldados(id_soldado,nome_quartel,habilidade,idade)
 VALUES(5,'Quartel dos Arqueiros','Arco e Flecha',30);
 
---soldados dos quarteis de lanceiros
+-- soldados dos quarteis de lanceiros
 INSERT INTO soldados(id_soldado,nome_quartel,habilidade,idade)
 VALUES(1,'Quartel das Lanças','Lança e Escudo',30);
 INSERT INTO soldados(id_soldado,nome_quartel,habilidade,idade)
