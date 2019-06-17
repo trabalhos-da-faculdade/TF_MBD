@@ -2,11 +2,11 @@
 
 --Tabelas das Minas do Reino
 
-CREATE TABLE carvao(
+CREATE TABLE carvoes(
     quantidade_carvao numeric(4) NOT NULL,
     CONSTRAINT pk_carvao PRIMARY KEY(quantidade_carvao)
 );
-CREATE TABLE ferro(
+CREATE TABLE ferros(
     quantidade_ferro numeric(4) NOT NULL,
     CONSTRAINT pk_ferro PRIMARY KEY(quantidade_ferro)
 );
@@ -40,11 +40,11 @@ CREATE TABLE forjas(
 );
 
 -- Tabelas das Fazendas
-CREATE TABLE feno(
+CREATE TABLE fenos(
     quantidade_feno numeric(4) NOT NULL,
     CONSTRAINT pk_feno PRIMARY KEY(quantidade_feno)
 );
-CREATE TABLE trigo(
+CREATE TABLE trigos(
     quantidade_trigo numeric(4) NOT NULL,
     CONSTRAINT pk_trigo PRIMARY KEY(quantidade_trigo)
 );
@@ -68,7 +68,7 @@ CREATE TABLE madeireiras(
 );
 
 -- Tabela Armazem
-CREATE TABLE armazem(
+CREATE TABLE armazens(
     quantidade_feno numeric(4),
     quantidade_Aco numeric(4),
     quantidade_madeira numeric(4),
@@ -79,8 +79,8 @@ CREATE TABLE armazem(
     CONSTRAINT pk_trigo PRIMARY KEY(quantidade_trigo)
 );
 
--- Tabela distribuidores armazem
-CREATE TABLE distribuidores armazem(
+-- Tabela distribuidores-armazens
+CREATE TABLE distribuidores-armazens(
     nome_distribuidor varchar(100) NOT NULL,
     quantidade_madeira numeric(4),
     quantidade_trigo numeric(4),
@@ -139,8 +139,8 @@ CREATE TABLE estabulos(
     CONSTRAINT pk_quant_penas PRIMARY KEY(quantidade_penas),
 );
 
--- Tabela distribuidores estabulo
-CREATE TABLE distribuidores estabulo(
+-- Tabela distribuidores-estabulos
+CREATE TABLE distribuidores-estabulo(
     nome_distribuidor varchar(100) NOT NULL,
     quantidade_cavalos numeric(4),
     quantidade_couro numeric(4),
@@ -168,8 +168,8 @@ CREATE TABLE cavaleiros(
     CONSTRAINT pk_cavalos_treinados PRIMARY KEY(cavalos_treinados)
 );
 
--- Tabela arsenal
-CREATE TABLE arsenal(
+-- Tabela arsenais
+CREATE TABLE arsenais(
     nome_arsenal varchar(100) NOT NULL,
     quantidade_flechas numeric(4),
     quantidade_arcos numeric(4),
@@ -206,7 +206,7 @@ CREATE TABLE generais(
     idade numeric(2),
     CONSTRAINT pk_nome_general PRIMARY KEY(nome_general)
 );
-CREATE TABLE interagem(
+CREATE TABLE interacoes(
     rank_general numeric(4) NOT NULL,
     hierarquia varchar(100),
     CONSTRAINT pk_rank_general PRIMARY KEY(rank_general)
@@ -216,9 +216,9 @@ CREATE TABLE interagem(
 
 -- minas
 ALTER TABLE minas
-ADD CONSTRAINT fk_ferro foreign KEY(quantidade_ferro) references ferro;
+ADD CONSTRAINT fk_ferro foreign KEY(quantidade_ferro) references ferros;
 ALTER TABLE minas
-ADD CONSTRAINT fk_carvao foreign KEY(quantidade_carvao) references carvao;
+ADD CONSTRAINT fk_carvao foreign KEY(quantidade_carvao) references carvoes;
 
 -- transportes
 ALTER TABLE transportes
@@ -244,39 +244,39 @@ ADD CONSTRAINT fk_quant_feno foreign KEY(quantidade_feno) references feno;
 ALTER TABLE fazendas
 ADD CONSTRAINT fk_quant_trigo foreign KEY(quantidade_trigo) references trigo;
 
---armazem
-ALTER TABLE armazem
+--armazens
+ALTER TABLE armazens
 ADD CONSTRAINT fk_quant_feno foreign KEY(quantidade_feno) references fazendas;
-ALTER TABLE armazem
+ALTER TABLE armazens
 ADD CONSTRAINT fk_quant_trigo foreign KEY(quantidade_trigo) references fazendas;
-ALTER TABLE armazem
+ALTER TABLE armazens
 ADD CONSTRAINT fk_quant_aco foreign KEY(quantidade_aco) references forjas;
-ALTER TABLE armazem
+ALTER TABLE armazens
 ADD CONSTRAINT fk_quant_madeira foreign KEY(quantidade_madeira) references madeireiras; 
 
--- distribuidores armazem
-ALTER TABLE distribuidores armazem
+-- distribuidores-armazens
+ALTER TABLE distribuidores-armazens
 ADD CONSTRAINT fk_arqueiros foreign KEY(nome_arqueiro) references arqueiros;
-ALTER TABLE distribuidores armazem
+ALTER TABLE distribuidores-armazens
 ADD CONSTRAINT fk_ferreiros foreign KEY(nome_ferreiro) references ferreiros;
 
 -- arqueiros
 ALTER TABLE arqueiros
-ADD CONSTRAINT fk_quant_penas foreign KEY(quantidade_penas) references distribuidores estabulo;
+ADD CONSTRAINT fk_quant_penas foreign KEY(quantidade_penas) references distribuidores-estabulos;
 ALTER TABLE arqueiros
 ADD CONSTRAINT fk_quant_flechas foreign KEY(quantidade_flechas) references arqueiros;
 ALTER TABLE arqueiros
 ADD CONSTRAINT fk_quant_arcos foreign KEY(quantidade_arcos) references arqueiros;
 ALTER TABLE arqueiros
-ADD CONSTRAINT fk_nome_distribuidor foreign KEY(nome_distribuidor) references distribuidores estabulo;
+ADD CONSTRAINT fk_nome_distribuidor foreign KEY(nome_distribuidor) references distribuidores-estabulos;
 ALTER TABLE arqueiros
-ADD CONSTRAINT fk_quant_madeira foreign KEY(quantidade_madeira) references distribuidores armazem;
+ADD CONSTRAINT fk_quant_madeira foreign KEY(quantidade_madeira) references distribuidores-armazens;
 
 --ferreiros
 ALTER TABLE ferreiros
-ADD CONSTRAINT fk_quant_aco foreign KEY(quantidade_aco) references distribuidores armazem;
+ADD CONSTRAINT fk_quant_aco foreign KEY(quantidade_aco) references distribuidores-armazens;
 ALTER TABLE ferreiros
-ADD CONSTRAINT fk_quant_madeira foreign KEY(quantidade_madeira) references distribuidores armazem;
+ADD CONSTRAINT fk_quant_madeira foreign KEY(quantidade_madeira) references distribuidores-armazens;
 ALTER TABLE ferreiros
 ADD CONSTRAINT fk_quant_escudo foreign KEY(quantidade_escudo) references ferreiros;
 ALTER TABLE ferreiros
@@ -284,18 +284,18 @@ ADD CONSTRAINT fk_quant_lancas foreign KEY(quantidade_lancas) references ferreir
 ALTER TABLE ferreiros
 ADD CONSTRAINT fk_quant_espadas foreign KEY(quantidade_espadas) references ferreiros;
 
---distribuidores estabulo
-ALTER TABLE distribuidores estabulo
+--distribuidores-estabulos
+ALTER TABLE distribuidores-estabulos
 ADD CONSTRAINT fk_nome_armadureiro foreign KEY(nome_armadureiro) references armadureiros;
-ALTER TABLE distribuidores estabulo
+ALTER TABLE distribuidores-estabulos
 ADD CONSTRAINT fk_nome_arqueiro foreign KEY(nome_arqueiro) references arqueiros;
-ALTER TABLE distribuidores estabulo
+ALTER TABLE distribuidores-estabulos
 ADD CONSTRAINT fk_nome_cavaleiro foreign KEY(nome_cavaleiro) references cavaleiros;
-ALTER TABLE distribuidores estabulo
+ALTER TABLE distribuidores-estabulos
 ADD CONSTRAINT fk_quant_cavalos foreign KEY(quantidade_cavalos) references estabulo;
-ALTER TABLE distribuidores estabulo
+ALTER TABLE distribuidores-estabulos
 ADD CONSTRAINT fk_quant_couro foreign KEY(quantidade_couro) references estabulo;
-ALTER TABLE distribuidores estabulo
+ALTER TABLE distribuidores-estabulos
 ADD CONSTRAINT fk_quant_penas foreign KEY(quantidade_penas) references estabulo;
 
 --estabulo
@@ -310,7 +310,7 @@ ADD CONSTRAINT fk_quant_penas foreign KEY(quantidade_penas) references galinhas;
 ALTER TABLE armadureiros
 ADD CONSTRAINT fk_quant_armadura foreign KEY(quantidade_armadura) references armadureiros;
 ALTER TABLE armadureiros
-ADD CONSTRAINT fk_quant_couro foreign KEY(quantidade_couro) references distribuidores estabulo;
+ADD CONSTRAINT fk_quant_couro foreign KEY(quantidade_couro) references distribuidores-estabulos;
 
 --cavaleiros
 ALTER TABLE cavaleiros
@@ -318,23 +318,23 @@ ADD CONSTRAINT fk_cavalo_treinados foreign KEY(cavalos_treinados) references cav
 ALTER TABLE cavaleiros
 ADD CONSTRAINT fk_nome_quartel foreign KEY(nome_quartel) references quarteis;
 ALTER TABLE cavaleiros
-ADD CONSTRAINT fk_quant_cavalos foreign KEY(quantidade_cavalos) references distribuidores estabulos;
+ADD CONSTRAINT fk_quant_cavalos foreign KEY(quantidade_cavalos) references distribuidores-estabulos;
 ALTER TABLE cavaleiros
-ADD CONSTRAINT fk_quant_feno foreign KEY(quantidade_feno) references distribuidores armazem;
+ADD CONSTRAINT fk_quant_feno foreign KEY(quantidade_feno) references distribuidores-armazens;
 
---arsenal
-ALTER TABLE arsenal
+--arsenais
+ALTER TABLE arsenais
 ADD CONSTRAINT fk_quantidade_flechas foreign KEY(quantidade_flechas) references arqueiros;
-ALTER TABLE arsenal
+ALTER TABLE arsenais
 ADD CONSTRAINT fk_quantidade_arcos foreign KEY(quantidade_arcos) references arqueiros;
-ALTER TABLE arsenal
+ALTER TABLE arsenais
 ADD CONSTRAINT fk_quantidade_armadura foreign KEY(quantidade_armadura) references armadureiros;
 
 --quarteis
 ALTER TABLE quarteis
 ADD CONSTRAINT fk_nome_general foreign KEY(nome_general) references generais;
 ALTER TABLE quarteis
-ADD CONSTRAINT fk_nome_arsenal foreign KEY(nome_arsenal) references arsenal;
+ADD CONSTRAINT fk_nome_arsenal foreign KEY(nome_arsenal) references arsenais;
 ALTER TABLE quarteis
 ADD CONSTRAINT fk_id_soldado foreign KEY(id_soldado) references soldados;
 ALTER TABLE quarteis
@@ -353,3 +353,75 @@ ADD CONSTRAINT fk_rank_general foreign KEY(rank_general) references interagem;
 --interagem
 ALTER TABLE interagem
 ADD CONSTRAINT fk_nome_general foreign KEY(nome_general) references generais;
+
+-- POPULANDO BANCO
+
+-- MINAS
+INSERT INTO carvoes(quantidade_carvao)
+VALUES(432);
+INSERT INTO ferros(quantidade_ferro)
+VALUES(432);
+INSERT INTO minas(numero_mina,quantidade_servos,quantidade_ferro,quantidade_carvao)
+VALUES(1,11,null,432);
+INSERT INTO minas(numero_mina,quantidade_servos,quantidade_ferro,quantidade_carvao)
+VALUES(2,12,432,null);
+
+--TRANSPORTES
+INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina,quantidade_ferro,quantidade_carvao,id_forja)
+VALUES(10,43,1,null,432,1);
+INSERT INTO transportes(numero_carrocas,quantidade_por_carrocas,numero_mina,quantidade_ferro,quantidade_carvao,id_forja)
+VALUES(10,43,2,432,null,1);
+
+--FORJAS
+INSERT INTO forjas(id_forja,quantidade_aco,quantidade_ferro,quantidade_carvao)
+VALUES(1,432,432,432);
+
+--FAZENDAS
+INSERT INTO fenos(quantidade_feno)
+VALUES(200);
+INSERT INTO trigo(quantidade_trigo)
+VALUES(200);
+INSERT INTO fazendas(numero_fazenda,quantidade_servos,quantidade_feno,quantidade_trigo)
+VALUES(1,20,null,200);
+INSERT INTO fazendas(numero_fazenda,quantidade_servos,quantidade_feno,quantidade_trigo)
+VALUES(2,20,200,null);
+
+--MADEIREIRAS
+INSERT INTO madeireiras(id_madeireira,quantidade_madeira,quantidade_servos)
+VALUES(1,200,20);
+
+--ARMAZENS
+INSERT INTO armazens(quantidade_feno,quantidade_aco,quantidade_madeira,quantidade_trigo)
+VALUES(200,432,200,200);
+
+-- DISTRIBUIDORES-ARMAZENS
+INSERT INTO distribuidores-armazens(nome_distribuidor,quantidade_madeira,quantidade_trigo,quantidade_aco,quantidade_feno,nome_arqueiro,nome_ferreiro)
+VALUES('Zelda',40,null,20,null,'helger','bronn');
+INSERT INTO distribuidores-armazens(nome_distribuidor,quantidade_madeira,quantidade_trigo,quantidade_aco,quantidade_feno,nome_arqueiro,nome_ferreiro)
+VALUES('Tronn',40,null,20,null,'helger','bronn');
+
+
+
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
+INSERT INTO ()
+VALUES();
