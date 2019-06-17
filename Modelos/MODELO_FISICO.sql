@@ -1,3 +1,5 @@
+--MODELO JOGADO FORA
+
 -- CÓDIGO SQL DO CASTELO FEUDAL
 
 --Tabelas das Minas do Reino
