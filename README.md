@@ -15,7 +15,7 @@ GLOSSÁRIO
 
 Informação|No trabalho|Concluido|
 |---|---|---|
-História do Banco de Dados|:construction:||
+História do Banco de Dados|:white_check_mark:||
 8 Entidades|:white_check_mark:||
 2 Relacionamentos n-n com Atributos|:white_check_mark:||
 1 entidade Associativa|:white_check_mark:||
@@ -32,6 +32,7 @@ Tabelas do Modelos Conceitual no Astah|:construction:||
 Informação|No trabalho|Concluido|
 |---|---|---|
 Construção do Modelo Lógico no BRModelo|:white_check_mark:|
+Dicionário de Dados sobre as Tabelas|:white_check_mark:|
 
 ## Programa SQL
 
@@ -39,32 +40,7 @@ Construção do Modelo Lógico no BRModelo|:white_check_mark:|
 
 Tabelas Criadas|Colocado no arquivo|funcionando|
 |---|---|---|
-carvao|:white_check_mark:|
-ferro|:white_check_mark:|
-minas|:white_check_mark:|
-transportes|:white_check_mark:|
-forjas|:white_check_mark:|
-feno|:white_check_mark:|
-trigo|:white_check_mark:|
-fazendas|:white_check_mark:|
-madeireiras|:white_check_mark:|
-armazem|:white_check_mark:|
-distribuidores armazem|:white_check_mark:|
-arqueiros|:white_check_mark:|
-ferreiros|:white_check_mark:|
-cavalos|:white_check_mark:|
-bois|:white_check_mark:|
-galinhas|:white_check_mark:|
-estabulos|:white_check_mark:|
-dsitribuidores estabulo|:white_check_mark:|
-armadureiros|:white_check_mark:|
-cavaleiros|:white_check_mark:|
-arsenal|:white_check_mark:|
-quarteis|:white_check_mark:|
-soldados|:white_check_mark:|
-titulos|:white_check_mark:|
-generais|:white_check_mark:|
-interagem|:white_check_mark:|
+Construido o arquivo SQL|:white_check_mark:|
 
 
 
