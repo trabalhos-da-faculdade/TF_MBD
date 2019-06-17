@@ -115,6 +115,30 @@ CREATE TABLE ferreiros(
     CONSTRAINT pk_quant_espadas PRIMARY KEY(quantidade_espadas)
 );
 
+-- Tabela de produção para os estábulos
+CREATE TABLE cavalos(
+    quantidade_cavalos numeric(4) NOT NULL,
+    CONSTRAINT pk_quant_cavalos PRIMARY KEY(quantidade_cavalos)
+);
+CREATE TABLE bois(
+    quantidade_couro numeric(4) NOT NULL,
+    CONSTRAINT pk_quant_couro PRIMARY KEY(quantidade_couro)
+);
+CREATE TABLE galinhas(
+    quantidade_penas numeric(4) NOT NULL,
+    CONSTRAINT pk_quant_penas PRIMARY KEY(quantidade_penas)
+);
+CREATE TABLE estabulos(
+    nome_estabulo varchar(100) NOT NULL,
+    quantidade_cavalos numeric(4),
+    quantidade_couro numeric(4),
+    quantidade_penas numeric(4),
+    quantidade_servos numeric(4),
+    CONSTRAINT pk_quant_cavalos PRIMARY KEY(quantidade_cavalos),
+    CONSTRAINT pk_quant_couro PRIMARY KEY(quantidade_couro),
+    CONSTRAINT pk_quant_penas PRIMARY KEY(quantidade_penas),
+);
+
 -- Tabela distribuidores estabulo
 CREATE TABLE distribuidores estabulo(
     nome_distribuidor varchar(100) NOT NULL,
@@ -125,6 +149,14 @@ CREATE TABLE distribuidores estabulo(
     CONSTRAINT pk_quant_cavalos PRIMARY KEY(quantidade_cavalos),
     CONSTRAINT pk_quant_couro PRIMARY KEY(quantidade_couro),
     CONSTRAINT pk_quant_penas PRIMARY KEY(quantidade_penas)
+);
+
+-- Tabela armadureiros
+CREATE TABLE armadureiros(
+    nome_armadureiro varchar(100) NOT NULL,
+    quantidade_armadura numeric(4),
+    CONSTRAINT pk_nome_armadureiro PRIMARY KEY(nome_armadureiro),
+    CONSTRAINT pk_quant_armadura PRIMARY KEY(quantidade_armadura)
 );
 
 -- CHAVES ESTRANGEIRAS
@@ -211,4 +243,18 @@ ADD CONSTRAINT fk_quant_cavalos foreign KEY(quantidade_cavalos) references estab
 ALTER TABLE distribuidores estabulo
 ADD CONSTRAINT fk_quant_couro foreign KEY(quantidade_couro) references estabulo;
 ALTER TABLE distribuidores estabulo
-ADD CONSTRAINT fk_quant_penas foreign KEY(quantidade_penas) references 
+ADD CONSTRAINT fk_quant_penas foreign KEY(quantidade_penas) references estabulo;
+
+--estabulo
+ALTER TABLE estabulo
+ADD CONSTRAINT fk_quant_cavalos foreign KEY(quantidade_cavalos) references cavalos;
+ALTER TABLE estabulo
+ADD CONSTRAINT fk_quant_couro foreign KEY(quantidade_couro) references bois;
+ALTER TABLE estabulo
+ADD CONSTRAINT fk_quant_penas foreign KEY(quantidade_penas) references galinhas;
+
+--armadureiros
+ALTER TABLE armadureiros
+ADD CONSTRAINT fk_quant_armadura foreign KEY(quantidade_armadura) references armadureiros;
+ALTER TABLE armadureiros
+ADD CONSTRAINT fk_quant_couro foreign KEY(quantidade_couro) references distribuidores estabulo;
