@@ -159,6 +159,59 @@ CREATE TABLE armadureiros(
     CONSTRAINT pk_quant_armadura PRIMARY KEY(quantidade_armadura)
 );
 
+-- Tabela cavaleiros
+CREATE TABLE cavaleiros(
+    nome_cavaleiro varchar(100) NOT NULL,
+    quantidade_selas numeric(4),
+    cavalos_treinados numeric(4),
+    CONSTRAINT pk_nome_cavaleiro PRIMARY KEY(nome_cavaleiro),
+    CONSTRAINT pk_cavalos_treinados PRIMARY KEY(cavalos_treinados)
+);
+
+-- Tabela arsenal
+CREATE TABLE arsenal(
+    nome_arsenal varchar(100) NOT NULL,
+    quantidade_flechas numeric(4),
+    quantidade_arcos numeric(4),
+    quantidade_armadura numeric(4),
+    CONSTRAINT pk_nome_arsenal PRIMARY KEY(nome_arsenal)
+);
+
+-- Tabela quarteis
+CREATE TABLE quarteis(
+    nome_quartel varchar(100) NOT NULL,
+    tipo_quartel varchar(100),
+    numero_soldadoS numeric(4),
+    CONSTRAINT pk_nome_quartel PRIMARY KEY(nome_quartel) 
+);
+
+-- Tabela soldados
+CREATE TABLE soldados(
+    id_soldado numeric(4) NOT NULL,
+    nome_quartel varchar(100),
+    habilidade varchar(100),
+    idade numeric(2),
+    CONSTRAINT pk_id_soldado PRIMARY KEY(id_soldado)
+);
+
+-- Tabelas dos Generais
+CREATE TABLE titulos(
+    titulo_nobreza varchar(100) NOT NULL,
+    tipo_titulo varchar(100),
+    CONSTRAINT pk_titulo_nobreza PRIMARY KEY(titulo_nobreza)
+);
+CREATE TABLE generais(
+    nome_general varchar(100) NOT NULL,
+    habilidade varchar(100),
+    idade numeric(2),
+    CONSTRAINT pk_nome_general PRIMARY KEY(nome_general)
+);
+CREATE TABLE interagem(
+    rank_general numeric(4) NOT NULL,
+    hierarquia varchar(100),
+    CONSTRAINT pk_rank_general PRIMARY KEY(rank_general)
+);
+
 -- CHAVES ESTRANGEIRAS
 
 -- minas
@@ -258,3 +311,45 @@ ALTER TABLE armadureiros
 ADD CONSTRAINT fk_quant_armadura foreign KEY(quantidade_armadura) references armadureiros;
 ALTER TABLE armadureiros
 ADD CONSTRAINT fk_quant_couro foreign KEY(quantidade_couro) references distribuidores estabulo;
+
+--cavaleiros
+ALTER TABLE cavaleiros
+ADD CONSTRAINT fk_cavalo_treinados foreign KEY(cavalos_treinados) references cavaleiros;
+ALTER TABLE cavaleiros
+ADD CONSTRAINT fk_nome_quartel foreign KEY(nome_quartel) references quarteis;
+ALTER TABLE cavaleiros
+ADD CONSTRAINT fk_quant_cavalos foreign KEY(quantidade_cavalos) references distribuidores estabulos;
+ALTER TABLE cavaleiros
+ADD CONSTRAINT fk_quant_feno foreign KEY(quantidade_feno) references distribuidores armazem;
+
+--arsenal
+ALTER TABLE arsenal
+ADD CONSTRAINT fk_quantidade_flechas foreign KEY(quantidade_flechas) references arqueiros;
+ALTER TABLE arsenal
+ADD CONSTRAINT fk_quantidade_arcos foreign KEY(quantidade_arcos) references arqueiros;
+ALTER TABLE arsenal
+ADD CONSTRAINT fk_quantidade_armadura foreign KEY(quantidade_armadura) references armadureiros;
+
+--quarteis
+ALTER TABLE quarteis
+ADD CONSTRAINT fk_nome_general foreign KEY(nome_general) references generais;
+ALTER TABLE quarteis
+ADD CONSTRAINT fk_nome_arsenal foreign KEY(nome_arsenal) references arsenal;
+ALTER TABLE quarteis
+ADD CONSTRAINT fk_id_soldado foreign KEY(id_soldado) references soldados;
+ALTER TABLE quarteis
+ADD CONSTRAINT fk_cavalos_treinados foreign KEY(cavalos_treinados) references cavaleiros;
+
+--soldados
+ALTER TABLE soldados
+ADD CONSTRAINT fk_nome_quartel foreign KEY(nome_quartel) references quarteis;
+
+--generais
+ALTER TABLE generais
+ADD CONSTRAINT fk_nome_quartel foreign KEY(nome_quartel) references quarteis;
+ALTER TABLE generais
+ADD CONSTRAINT fk_rank_general foreign KEY(rank_general) references interagem;
+
+--interagem
+ALTER TABLE interagem
+ADD CONSTRAINT fk_nome_general foreign KEY(nome_general) references generais;
